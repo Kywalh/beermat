@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> My beermat</title>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+
+<style type='text/css'>
+body { 
+	background-image: url({{ url_for('static', filename='bg.jpg') }});
+	background-color:#D9D9D9;
+	background-blend-mode: screen,difference,lighten;
+
+}
+
+
+input[type=submit] {
+  display: block;
+  background-color: #4CAF50;
+  font-size: 75px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
+  line-height: 75px;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 0 auto;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  width: 500px;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+}
+input[type=submit]:hover {background-color: #3e8e41}
+input[type=submit]:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+input[type=text] {
+  font-size: 75px;
+  background-color: #FFFFFF;
+  border: none;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  width: 250px;
+  height: 50px;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+}
+input[type=text]:hover {background-color: #3e8e41}
+input[type=text]:active {
+  background-color: #ECFA35;
+  box-shadow: 0 5px #ECFA35;
+  transform: translateY(4px);
+}
+
+.mytitle {
+  font-size: 100px;
+  color:#3e8e41;
+  text-shadow: 2px 2px 20px #ECFA35;
+  font-style: italic;
+  font-weight: bold;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  padding-left: 50px;
+  padding-right: 50px;
+  line-height: 125px;
+  display: block;
+  margin: 0 auto;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+}
+
+.mysubtitle {
+  font-size: 75px;
+  color:#3e8e41;
+  text-shadow: 1px 1px 10px #ECFA35;
+  font-style: italic;
+  font-weight: bold;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 75px;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  vertical-align: bottom;
+}
+
+input[type=color] {
+    width: 100px;
+    height: 100px; 
+    border-radius: 50%;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.images {
+  height: 250px;
+}
+
+.images:hover {  
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+} 
+.images:active {
+
+  }
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+}
+
+.tooltip .tooltiptext {
+  font-size: 50px;
+  visibility: hidden;
+  width: 250px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -100px;
+  background-color: #3e8e41;
+  color: #ECFA35;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+
+<br>
+<div class='mytitle'>My beermat !!!</div>
+<BR>
+
+<form action='{{ url_for('data') }}' method='post'>
+	<label for='fname' class='mysubtitle'>Ton p'tit nom:</label>
+	<input type='text' id='fname' name='fname' maxlength='10'>
+	<br>
+	<br><br><br>
+	<label for='favcolor' class='mysubtitle'>Choisis ton rétroéclairage:</label>
+	<input type='color' value='#000000' class='bar' id='favcolor' name='favcolor'>
+	<br>	
+	<br><br><br>
+	<label class='mysubtitle'>Choisis ton style : </label> #for='fbeertype'
+	<br>
+  	<br><br><br>
+	<table align='center' width='90%'>
+	  
+	  <tr>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='PaleAle.png') }}' alt='Pale Ale' class='images'>
+		<span class='tooltiptext'>Pale Ale</span>
+		</div>
+	      </td>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='Lager.png') }}' alt='Lager' class='images'>
+		<span class='tooltiptext'>Lager</span>
+		</div>
+	      </td>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='GermanHelles.png') }}' alt='German Helles' class='images'>
+		<span class='tooltiptext'>German Helles</span>
+		</div>
+	      </td>
+	  </tr>
+	  <tr>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='Wheat.png') }}' alt='Wheat' class='images'>
+		<span class='tooltiptext'>Wheat</span>
+		</div>
+	      </td>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='Golden.png') }}' alt='Golden' class='images'>
+		<span class='tooltiptext'>Golden</span>
+		</div>
+	      </td>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='Dark.png') }}' alt='Dark' class='images'>
+		<span class='tooltiptext'>Dark</span>
+		</div>
+	      </td>
+	  </tr>
+	  <tr>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='AmericanImperial.png') }}' alt='American Imperial'  class='images'>
+		<span class='tooltiptext'>American Imperial</span>
+		</div>
+	      </td>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='Stout.png') }}' alt='Stout' class='images'>
+		<span class='tooltiptext'>Stout</span>
+		</div>
+	      </td>
+	      <td align='center'>
+		<div class='tooltip'>
+		<img src='{{ url_for('static', filename='BelgianFruitLambic.png') }}' alt='Belgian Fruit Lambic' class='images'>
+		<span class='tooltiptext'>Belgian Fruit Lambic</span>
+		</div>
+	      </td>
+	  </tr>
+	  
+	</table>
+	<br>
+	<input class='Submitbtn' type='submit' value='Santé !!!'>
+</form>
+
+</CENTER>
+</body>
+</html>
